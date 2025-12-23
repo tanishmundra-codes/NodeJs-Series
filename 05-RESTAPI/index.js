@@ -20,12 +20,26 @@ app.route("/api/users/:id")
     return res.json(user);
 })
 .patch((req,res) => {
-    // Edit the user
-    return res.json({status : "pending"});
+    const ID = Number(req.params.id);
+    const userIndex = users.findIndex((user) => user.id == ID);
+
+    const body = req.body;
+    const updatedUser = {...users[userIndex], ...body};
+    users[userIndex] = updatedUser;
+
+    fs.writeFile("./USERS_DATA.json", JSON.stringify(users), (err, result) => {
+        return res.json({status : "sucess"});
+    }); 
 })
 .delete((req, res) => {
-    return res.json({status : "Pending"});
-})
+    const ID = Number(req.params.id);
+    const userIndex = users.findIndex((user) => user.id == ID);
+    users.splice(userIndex, 1);
+
+    fs.writeFile("./USERS_DATA.json", JSON.stringify(users), (err, result) => {
+        return res.json({status : "sucess"});
+    }); 
+});
 
 app.route("/api/users")
 .get((req,res) => {
