@@ -24,7 +24,7 @@ app.route("/api/users/:id")
     const userIndex = users.findIndex((user) => user.id == ID);
 
     const body = req.body;
-    const updatedUser = {...users[userIndex], ...body};
+    const updatedUser = {...users[userIndex], ...body}; // overwrite the data 
     users[userIndex] = updatedUser;
 
     fs.writeFile("./USERS_DATA.json", JSON.stringify(users), (err, result) => {
