@@ -1,6 +1,6 @@
 const express = require("express");
-const {logReqRes} = require("./middlewares/index")
 const userRouter = require("./routes/user")
+const {logReqRes} = require("./middlewares/index")
 const {connectDB} =  require("./connection");
 
 const app = express();
